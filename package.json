@@ -1,0 +1,26 @@
+{
+  "name": "regicide",
+  "version": "1.0.0",
+  "description": "implementation of the regicide card game.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuicheSama/regicide.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuicheSama/regicide/issues"
+  },
+  "homepage": "https://github.com/QuicheSama/regicide#readme",
+  "devDependencies": {
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
+  }
+}

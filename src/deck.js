@@ -1,5 +1,5 @@
 'use strict'
-const { royals, suits, cardEnums } = require('./enums');
+const { deckValues, suits, cardEnums } = require('./enums');
 
 const configsByNumPlayers = {
     2: {
@@ -23,32 +23,38 @@ function shuffle(arr) {
 
 function createCastle() {
     let castle = []
-    royals.forEach((royal) => {
+    deckValues.castle.forEach((value) => {
         const currentRoyals = []
         suits.forEach((suit) => {
-            currentRoyals.push({ value: royal, suit })
+            currentRoyals.push({ value, suit })
         })
-        shuffle(currentRoyals)
-        castle = castle.concat(currentRoyals)
+        castle = castle.concat(shuffle(currentRoyals))
     });
 
     return castle;
 }
 
-// function createTavern() {
-//     const tavernValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10', cardEnums.value.JESTER]
-//     let tavern = [];
+function createTavern(numPlayers) {
+    const { numJesters } = configsByNumPlayers[numPlayers]
+    let tavern = [];
+    deckValues.tavern.forEach((value) => {
+        suits.forEach((suit) => {
+            tavern.push({ value, suit })
+        })
+    });
+    for(let index = 0; index < numJesters; index++) {
+        tavern.push({ value: cardEnums.value.JESTER })
+    }
 
-//     tavernValues.forEach((tavernValue) => {
-//         suits.forEach((suit) => {
-//             tavern.push({ value: tavernValue, suit })
-//         })
-//     });
-//     for(index = 0; index < numPlayers)
-// }
-
-function createDecks(numPlayers) {
-    const { numJesters } = configsByNumPlayers(numPlayers)
-    const castle = createCastle();
+    return shuffle(tavern);
 }
 
+function createDecks(numPlayers = 2) {
+    const castle = createCastle();
+    const tavern = createTavern(numPlayers)
+    console.log(castle)
+    console.log('----------')
+    console.log(tavern)
+}
+
+createDecks(4)
