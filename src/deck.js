@@ -1,5 +1,6 @@
 'use strict'
 const { deckValues, suits, cardEnums } = require('./enums');
+const { shuffle } = require('./utils/deck');
 
 const configsByNumPlayers = {
     2: {
@@ -14,11 +15,6 @@ const configsByNumPlayers = {
         numJesters: 2,
         maxHandSize: 5
     }
-}
-
-function shuffle(arr) {
-    // TODO(@quichesama): Add shuffle logic
-    return arr;
 }
 
 function createCastle() {
@@ -43,10 +39,12 @@ function createTavern(numPlayers) {
         })
     });
     for(let index = 0; index < numJesters; index++) {
-        tavern.push({ value: cardEnums.value.JESTER })
+        tavern.push({ 
+            value: cardEnums.value.JESTER,
+        })
     }
 
-    return shuffle(tavern);
+    return tavern; //shuffle(tavern);
 }
 
 function createDecks(numPlayers = 2) {
@@ -55,6 +53,8 @@ function createDecks(numPlayers = 2) {
     console.log(castle)
     console.log('----------')
     console.log(tavern)
+    console.log(`There are a total of ${castle.length} castle cards, and ${tavern.length} tavern cards.`)
+    console.log(`That's a total of ${castle.length + tavern.length} cards`);
 }
 
 createDecks(4)

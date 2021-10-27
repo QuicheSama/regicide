@@ -7,7 +7,6 @@ const cardEnums = {
         JUGGERNAUT: 'J',
         ANIMAL: 'A',
         JESTER: 'C',
-        ONE: '1',
         TWO: '2',
         THREE: '3',
         FOUR: '4',
@@ -33,7 +32,6 @@ const deckValues = {
         cardEnums.value.JUGGERNAUT
     ],
     tavern: [
-        cardEnums.value.ONE,
         cardEnums.value.TWO,
         cardEnums.value.THREE,
         cardEnums.value.FOUR,
