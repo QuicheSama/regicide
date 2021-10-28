@@ -17,20 +17,22 @@ const configsByNumPlayers = {
     }
 }
 
-function createCastle() {
+function createCastleWithShuffle(shuffleFn) {
     let castle = []
     deckValues.castle.forEach((value) => {
         const currentRoyals = []
         suits.forEach((suit) => {
             currentRoyals.push({ value, suit })
         })
-        castle = castle.concat(shuffle(currentRoyals))
+        castle = castle.concat(
+            shuffleFn ? shuffleFn(currentRoyals) : currentRoyals
+        )
     });
 
     return castle;
 }
 
-function createTavern(numPlayers) {
+function createTavernWithShuffle(shuffleFn, numPlayers) {
     const { numJesters } = configsByNumPlayers[numPlayers]
     let tavern = [];
     deckValues.tavern.forEach((value) => {
@@ -44,8 +46,11 @@ function createTavern(numPlayers) {
         })
     }
 
-    return tavern; //shuffle(tavern);
+    return shuffleFn ? shuffleFn(tavern) : tavern;
 }
+
+const createCastle = createCastleWithShuffle.bind(this, shuffle)
+const createTavern = createTavernWithShuffle.bind(this, shuffle)
 
 function createDecks(numPlayers = 2) {
     const castle = createCastle();
@@ -58,3 +63,10 @@ function createDecks(numPlayers = 2) {
 }
 
 createDecks(4)
+
+module.exports = {
+    createCastleWithShuffle,
+    createTavernWithShuffle,
+    createCastle,
+    createTavern
+};
