@@ -17,6 +17,10 @@ const configsByNumPlayers = {
     }
 }
 
+function applyFn(fn, arr) {
+    return (typeof fn === 'function') ? fn(arr) : arr;
+}
+
 function createCastleWithShuffle(shuffleFn) {
     let castle = []
     deckValues.castle.forEach((value) => {
@@ -25,8 +29,8 @@ function createCastleWithShuffle(shuffleFn) {
             currentRoyals.push({ value, suit })
         })
         castle = castle.concat(
-            shuffleFn ? shuffleFn(currentRoyals) : currentRoyals
-        )
+            applyFn(shuffleFn, currentRoyals)
+        );
     });
 
     return castle;
@@ -46,7 +50,7 @@ function createTavernWithShuffle(shuffleFn, numPlayers) {
         })
     }
 
-    return shuffleFn ? shuffleFn(tavern) : tavern;
+    return applyFn(shuffleFn, tavern);
 }
 
 const createCastle = createCastleWithShuffle.bind(this, shuffle)
