@@ -1,21 +1,7 @@
 'use strict'
 const { deckValues, suits, cardEnums } = require('./enums');
 const { shuffle } = require('./utils/deck');
-
-const configsByNumPlayers = {
-    2: {
-        numJesters: 0,
-        maxHandSize: 7
-    },
-    3: {
-        numJesters: 1,
-        maxHandSize: 6
-    },
-    4: {
-        numJesters: 2,
-        maxHandSize: 5
-    }
-}
+const { gameSetupsByNumPlayers, gameSetupByNumPlayers } = require('./config/setup'); 
 
 function applyFn(fn, arr) {
     return (typeof fn === 'function') ? fn(arr) : arr;
@@ -37,7 +23,8 @@ function createCastleWithShuffle(shuffleFn) {
 }
 
 function createTavernWithShuffle(shuffleFn, numPlayers) {
-    const { numJesters } = configsByNumPlayers[numPlayers]
+    console.log(gameSetupByNumPlayers)
+    const { numJesters } = gameSetupsByNumPlayers[numPlayers];
     let tavern = [];
     deckValues.tavern.forEach((value) => {
         suits.forEach((suit) => {
